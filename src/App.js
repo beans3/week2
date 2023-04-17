@@ -8,10 +8,6 @@ function App() {
   let post = '강남 우동 맛집';
   let [title, updateTitle] = useState(['안녕하세요.', '남자 코트 정보', '강아지 코트 정보']);
   let [likeCount, updateLikeCount] = useState(0);
-
-  function updateTitle(title) {
-    title[0] = '여자 코트 정보' ;
-  }
  
   // state 쓰는 이유 : 일반 변수는 내용이 변경 되어도 html 업데이트가 안됨
   // distructuring 문법
