@@ -54,3 +54,21 @@ div {
   text-align: left;
   border-bottom: 1px solid grey;
 }
+
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background: #eee;
+  text-align: left;
+}
+
+.page-list {
+  list-style-type: none;
+  display: inline;
+  padding-left: 0px;
+}
+
+.page-list li {
+  display: inline;
+  padding: 10px;
+}
