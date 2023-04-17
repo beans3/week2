@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <div className='black-nav'>
-        <h4 style={{color: 'red', fontSize: '20px'}}>블로그임!!</h4>
+        <h4 style={{color: 'red', fontSize: '20px'}}>블로그임!!!</h4>
       </div>
       <h4 id={post}>{post}</h4>
       <button onClick={ () => { updateTitle('여자 코트 정보') } }>최신순</button>
