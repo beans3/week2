@@ -4,6 +4,11 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+input {
+  font-size: 15px;
+  padding: 10px;
+}
+
 .App {
   text-align: center;
 }
@@ -64,8 +69,11 @@ div {
   padding: 20px;
 }
 
-.list h4 {
+.date {
   display: inline;
+}
+.right {
+  margin-right: auto;
 }
 
 .modal {
@@ -85,6 +93,7 @@ div {
   cursor: pointer;
   text-decoration: none;
   color: #eee;
+  font-size: 13px;
 }
 .btn:visited {
   color: #eee;
@@ -95,4 +104,3 @@ div {
   background-color: #FDE2F3;
   color: #2A2F4F;
 }
-

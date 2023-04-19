@@ -2,6 +2,10 @@
 import './App.css';
 import { useState } from 'react';
 
+function formatDate(date) {
+  const isoDate = date.toISOString();
+  return isoDate.substring(0, 10);
+}
 function App() {
   const { v4: uuidv4 } = require('uuid');
   //연습용 배열
@@ -17,10 +21,13 @@ function App() {
     { id: uuidv4(), title: "아홉 번째 게시물", date: "2022-09-23", likes: 4, content: "아홉 번째 게시물 내용입니다." },
     { id: uuidv4(), title: "열 번째 게시물", date: "2022-10-31", likes: 1, content: "열 번째 게시물 내용입니다." }
   ];
+  const today = new Date();
+  const formattedDate = formatDate(today); // 예: "2023-04-19"
   let post = 'React Blog';
   let [postList, updatePost] = useState(posts);
   let [modal, showModal] = useState(false);
   let [modalId, setModalId] = useState('');
+  let [inputValue, setInputValue] = useState('');
 
   const updateLikeCount = (id) => {
     // post의 내용을 update한 뒤에
@@ -44,6 +51,29 @@ function App() {
     } else {
       showModal(true);
     }
+  }
+
+  const insertPost = (text) => {
+    const min = 1;
+    const max = 50;
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    let data = {
+      id: uuidv4(),
+      title: (postList.length + 1) + '번째 게시물',
+      date: formattedDate,
+      likes: randomNumber,
+      content: text
+    }
+
+    let copy = [...postList, data];
+    updatePost(copy);
+  }
+
+  const deletePost = (id) => {
+    let copy = [...postList]
+    copy = copy.filter(post => post.id !== id);
+    updatePost(copy);
   }
  
   // state 쓰는 이유 : 일반 변수는 내용이 변경 되어도 html 업데이트가 안됨
@@ -90,11 +120,14 @@ function App() {
       } }>가나다순으로 정렬</button>
       {
         // map으로 배열 리스트 반복
+        // e.stopPropagation(); 이벤트 버블링 막기
         postList.map(posts => (
             <div key={posts.id}>
               <div className='list'>
-                <h4 onClick={ () => openPost(posts.id) }>{ posts.title }</h4> <span onClick={ () => { updateLikeCount(posts.id) } }>💜{ posts.likes }</span>
-                <p>{ posts.date } 발행</p>
+                <h4 onClick={ () => openPost(posts.id) }>{ posts.title } <span onClick={ (e) => { e.stopPropagation(); updateLikeCount(posts.id) } }>💜{ posts.likes }</span></h4>
+                <p>{posts.content}</p>
+                <p className='date'>{ posts.date } 발행</p>
+                <button className='btn right' onClick={ () => deletePost(posts.id) }>삭제</button>
               </div>
             </div>
           )
@@ -105,6 +138,11 @@ function App() {
         modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
       }
       <More/>
+      <input onChange={(e) => {
+          // 완료되기 전에 console.log가 실행됨
+          setInputValue(e.target.value);
+        }}/>
+        <button className='btn' onClick={ () => insertPost(inputValue) }>글 발행</button>
     </div>
   );
 }
