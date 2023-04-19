@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -43,7 +49,7 @@ div {
 
 .black-nav {
   display: flex;
-  background: black;
+  background: #917FB3;
   width: 100%;
   color: white;
   padding-left: 20px;
@@ -52,26 +58,33 @@ div {
 .list {
   padding-left: 20px;
   text-align: left;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #917FB3;
   cursor: pointer;
+  color: #2A2F4F;
+  padding: 20px;
+}
+
+.list h4 {
+  display: inline;
 }
 
 .modal {
   margin-top: 20px;
   padding: 20px;
-  background: #eee;
+  background: #2A2F4F;
   text-align: left;
 }
 
 .btn {
   border-radius: 10px;
   border: none;
-  background-color: lightgray;
+  background-color: #917FB3;
   padding: 10px;
   margin: 10px;
   font-size: 15px;
   cursor: pointer;
   text-decoration: none;
+  color: #eee;
 }
 .btn:visited {
   color: #eee;
@@ -79,6 +92,7 @@ div {
 }
 
 .btn:hover {
-  background-color: cornflowerblue;
+  background-color: #FDE2F3;
+  color: #2A2F4F;
 }
 

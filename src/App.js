@@ -17,7 +17,7 @@ function App() {
     { id: uuidv4(), title: "아홉 번째 게시물", date: "2022-09-23", likes: 4, content: "아홉 번째 게시물 내용입니다." },
     { id: uuidv4(), title: "열 번째 게시물", date: "2022-10-31", likes: 1, content: "열 번째 게시물 내용입니다." }
   ];
-  let post = '리액트 맛집';
+  let post = 'React Blog';
   let [postList, updatePost] = useState(posts);
   let [modal, showModal] = useState(false);
   let [modalId, setModalId] = useState('');
@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="App">
       <div className='black-nav'>
-        <h4 style={{color: 'red', fontSize: '20px'}}>Nepflix</h4>
+        <h4 style={{color: '#eee', fontSize: '20px'}}>React Blog🤍</h4>
       </div>
       <h4 id={post}>{post}</h4>
       <button className='btn' onClick={ () => {
@@ -92,8 +92,8 @@ function App() {
         // map으로 배열 리스트 반복
         postList.map(posts => (
             <div key={posts.id}>
-              <div className='list' onClick={ () => openPost(posts.id) }>
-                <h4>{ posts.title } <span onClick={ () => { updateLikeCount(post.id) } }>👍</span>{ posts.likes }</h4>
+              <div className='list'>
+                <h4 onClick={ () => openPost(posts.id) }>{ posts.title }</h4> <span onClick={ () => { updateLikeCount(posts.id) } }>💜{ posts.likes }</span>
                 <p>{ posts.date } 발행</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ function App() {
       }
       {
         // postList 중에 id가 modalId와 같은 요소만 props로 보냄
-        modal == false ? null : <Modal posts={ postList.find(post => post.id === modalId) } updatePost={updatePost} color={ 'skyblue' }/>
+        modal == false ? null : <Modal posts={ postList.find(post => post.id === modalId) } updatePost={updatePost} color={ 'white' }/>
       }
       <More/>
     </div>
