@@ -52,29 +52,6 @@ function App() {
       showModal(true);
     }
   }
-
-  const insertPost = (text) => {
-    const min = 1;
-    const max = 50;
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    let data = {
-      id: uuidv4(),
-      title: (postList.length + 1) + '번째 게시물',
-      date: formattedDate,
-      likes: randomNumber,
-      content: text
-    }
-
-    let copy = [...postList, data];
-    updatePost(copy);
-  }
-
-  const deletePost = (id) => {
-    let copy = [...postList]
-    copy = copy.filter(post => post.id !== id);
-    updatePost(copy);
-  }
  
   // state 쓰는 이유 : 일반 변수는 내용이 변경 되어도 html 업데이트가 안됨
   // distructuring 문법
@@ -127,7 +104,12 @@ function App() {
                 <h4 onClick={ () => openPost(posts.id) }>{ posts.title } <span onClick={ (e) => { e.stopPropagation(); updateLikeCount(posts.id) } }>💜{ posts.likes }</span></h4>
                 <p>{posts.content}</p>
                 <p className='date'>{ posts.date } 발행</p>
-                <button className='btn right' onClick={ () => deletePost(posts.id) }>삭제</button>
+                <button className='btn right' onClick={ () => {
+                  let copy = [...postList]
+                  copy = copy.filter(post => post.id !== posts.id);
+                  //copy.slice(index, 개수);
+                  updatePost(copy);
+                } }>삭제</button>
               </div>
             </div>
           )
@@ -142,7 +124,23 @@ function App() {
           // 완료되기 전에 console.log가 실행됨
           setInputValue(e.target.value);
         }}/>
-        <button className='btn' onClick={ () => insertPost(inputValue) }>글 발행</button>
+        <button className='btn' onClick={ () => {
+          const min = 1;
+          const max = 50;
+          const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      
+          let data = {
+            id: uuidv4(),
+            title: (postList.length + 1) + '번째 게시물',
+            date: formattedDate,
+            likes: randomNumber,
+            content: inputValue
+          }
+      
+          let copy = [...postList, data];
+          //copy.unshift(data);
+          updatePost(copy);
+        }}>글 발행</button>
     </div>
   );
 }
