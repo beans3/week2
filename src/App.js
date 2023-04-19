@@ -102,7 +102,7 @@ function App() {
       }
       {
         // postList 중에 id가 modalId와 같은 요소만 props로 보냄
-        modal == false ? null : <Modal posts={ postList.find(post => post.id === modalId) } updatePost={updatePost} color={ 'white' }/>
+        modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
       }
       <More/>
     </div>
@@ -114,6 +114,7 @@ function App() {
 // 2. UI의 현재 상태를 state로 저장
 // 3. state에 따라 UI가 어떻게 보일지 작성
 function Modal(props) {
+  let post = props.postList.find(post => post.id == props.modalId);
   return (
     // Fragment 문법
     // componenet 만들어 html 축약
@@ -121,28 +122,18 @@ function Modal(props) {
     // 2. 큰 페이지들
     // 3. 자주 변경되는 것들
     // App()의 state 사용 불가
-    
     <>
-      <div className='modal' id={props.posts.id} style={{backgroundColor: props.color}}>
-        <h4>{ props.posts.title }</h4>
-        <p>{ props.posts.date }</p>
-        <p>{ props.posts.content }</p>
+      <div className='modal' id={post} style={{backgroundColor: props.color}}>
+        <h4>{ post.title }</h4>
+        <p>{ post.date }</p>
+        <p>{ post.content }</p>
         <button className='btn' onClick={ () => {
           let copy = [...props.postList];
-          copy.find(post => post.id === props.modalId).title = '제목 바꾸기';
+          let copyIndex = copy.findIndex(post => post.id === props.modalId);
+          copy[copyIndex].title = '제목 변경이당';
           props.updatePost(copy);
         } }>글수정</button>
       </div>
-      {/* <div className='modal' id={props.posts[0].id} style={{backgroundColor: props.color}}>
-        <h4>{ props.posts[0].title }</h4>
-        <p>{ props.posts[0].date }</p>
-        <p>{ props.posts[0].content }</p>
-        <button className='btn' onClick={ () => {
-          let copy = [...props.posts];
-          copy[0].title = '제목 바꾸기';
-          props.updatePost(copy);
-        } }>글수정</button>
-      </div> */}
     </>
   )
 }
