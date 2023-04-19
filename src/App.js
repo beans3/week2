@@ -101,7 +101,7 @@ function App() {
         )
       }
       {
-        // postList 중에 id가 modalId와 같은 요소만 props로 보냄
+        // postList를 모두 보내되 현재 선택한 posts.id를 modalId에 담아 props로 보냄
         modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
       }
       <More/>
