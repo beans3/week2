@@ -53,6 +53,7 @@ div {
   padding-left: 20px;
   text-align: left;
   border-bottom: 1px solid grey;
+  cursor: pointer;
 }
 
 .modal {
@@ -62,13 +63,22 @@ div {
   text-align: left;
 }
 
-.page-list {
-  list-style-type: none;
-  display: inline;
-  padding-left: 0px;
+.btn {
+  border-radius: 10px;
+  border: none;
+  background-color: lightgray;
+  padding: 10px;
+  margin: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:visited {
+  color: #eee;
+  background-color: tomato;
 }
 
-.page-list li {
-  display: inline;
-  padding: 10px;
+.btn:hover {
+  background-color: cornflowerblue;
 }
+
