@@ -119,7 +119,6 @@ function App() {
         // postList를 모두 보내되 현재 선택한 posts.id를 modalId에 담아 props로 보냄
         modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
       }
-      <More/>
       <input onChange={(e) => {
           // 완료되기 전에 console.log가 실행됨
           setInputValue(e.target.value);
