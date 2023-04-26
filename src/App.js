@@ -1,6 +1,6 @@
 /* eslint-disable */
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function formatDate(date) {
   const isoDate = date.toISOString();
@@ -24,11 +24,26 @@ function App() {
   const today = new Date();
   const formattedDate = formatDate(today); // 예: "2023-04-19"
   let post = 'React Blog';
-  let [postList, updatePost] = useState(posts);
+  //let [postList, updatePost] = useState(posts);
+  let [postList, updatePost] = useState([]);
   let [modal, showModal] = useState(false);
   let [modalId, setModalId] = useState('');
   let [inputValue, setInputValue] = useState('');
 
+  let [loading, setLoading] = useState(false);
+  let [currentPage, setCurrentPage] = useState(1);
+  let [postsPerPage, setPostsPerPage] = useState(3);
+
+  useEffect(() => {
+    setLoading(true);
+    updatePost([...posts.slice(0, postsPerPage)]);
+    setLoading(false);
+  }, [currentPage, postsPerPage]);
+
+  const LoadMore = () => {
+    setPostsPerPage(postsPerPage + 3);
+  };
+  
   const updateLikeCount = (id) => {
     // post의 내용을 update한 뒤에
     // updatePost 호출하여 적용
@@ -119,6 +134,12 @@ function App() {
         // postList를 모두 보내되 현재 선택한 posts.id를 modalId에 담아 props로 보냄
         modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
       }
+      <div>
+        { loading && <p>loading...</p>}
+        {!loading && (
+          <button className='btn' onClick={ LoadMore }>더보기</button>
+        )}
+      </div>
       <input onChange={(e) => {
           // 완료되기 전에 console.log가 실행됨
           setInputValue(e.target.value);
@@ -170,15 +191,6 @@ function Modal(props) {
         } }>글수정</button>
       </div>
     </>
-  )
-}
-
-// 이렇게 사용 가능
-const More = () => {
-  return (
-    <div>
-      <button className='btn'>더보기</button>
-    </div>
   )
 }
 
