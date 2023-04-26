@@ -31,14 +31,17 @@ function App() {
   let [inputValue, setInputValue] = useState('');
 
   let [loading, setLoading] = useState(false);
-  let [currentPage, setCurrentPage] = useState(1);
   let [postsPerPage, setPostsPerPage] = useState(3);
+  let [loadingText, setLoadingText] = useState('더보기');
 
   useEffect(() => {
     setLoading(true);
     updatePost([...posts.slice(0, postsPerPage)]);
     setLoading(false);
-  }, [currentPage, postsPerPage]);
+    if (posts.length <= postsPerPage) {
+      setLoadingText('마지막 글입니다.');
+    }
+  }, [postsPerPage]);
 
   const LoadMore = () => {
     setPostsPerPage(postsPerPage + 3);
@@ -137,7 +140,7 @@ function App() {
       <div>
         { loading && <p>loading...</p>}
         {!loading && (
-          <button className='btn' onClick={ LoadMore }>더보기</button>
+          <button className='btn' onClick={ LoadMore }>{loadingText}</button>
         )}
       </div>
       <input onChange={(e) => {
