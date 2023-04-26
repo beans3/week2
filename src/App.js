@@ -129,17 +129,18 @@ function App() {
                   updatePost(copy);
                 } }>삭제</button>
               </div>
+              {
+                // postList를 모두 보내되 현재 선택한 posts.id를 modalId에 담아 props로 보냄
+                modal == false ? null : posts.id == modalId ? <Modal postList={ postList } modalId={ modalId } updatePost={ updatePost } color={ '#FDE2F3' }/> : null
+              }
             </div>
           )
         )
       }
-      {
-        // postList를 모두 보내되 현재 선택한 posts.id를 modalId에 담아 props로 보냄
-        modal == false ? null : <Modal postList={ postList } modalId={ modalId } updatePost={updatePost} color={ 'white' }/>
-      }
+      
       <div>
-        { loading && <p>loading...</p>}
-        {!loading && (
+        { loading && <p>loading...</p> }
+        { !loading && (
           <button className='btn' onClick={ LoadMore }>{loadingText}</button>
         )}
       </div>
@@ -181,19 +182,17 @@ function Modal(props) {
     // 2. 큰 페이지들
     // 3. 자주 변경되는 것들
     // App()의 state 사용 불가
-    <>
-      <div className='modal' id={post} style={{backgroundColor: props.color}}>
-        <h4>{ post.title }</h4>
-        <p>{ post.date }</p>
-        <p>{ post.content }</p>
-        <button className='btn' onClick={ () => {
-          let copy = [...props.postList];
-          let copyIndex = copy.findIndex(post => post.id === props.modalId);
-          copy[copyIndex].title = '제목 변경이당';
-          props.updatePost(copy);
-        } }>글수정</button>
-      </div>
-    </>
+    <div className='modal' id={post.id} style={{backgroundColor: props.color}}>
+      <h4>{ post.title }</h4>
+      <p>{ post.date }</p>
+      <p>{ post.content }</p>
+      <button className='btn' onClick={ () => {
+        let copy = [...props.postList];
+        let copyIndex = copy.findIndex(post => post.id === props.modalId);
+        copy[copyIndex].title = '제목 변경이당';
+        props.updatePost(copy);
+      } }>글수정</button>
+    </div>
   )
 }
 
