@@ -1,0 +1,7 @@
+[submodule "build"]
+	path = build
+	url = https://github.com/beans3/beans3.github.io.git
+      branch = main
+      depth = 1
+      ignore = dirty
+      no-gitdir = true
