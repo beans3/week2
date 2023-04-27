@@ -5,4 +5,4 @@
       depth = 1
       ignore = dirty
       no-gitdir = true
-	gitdir = ../.git/modules/build
+	gitdir = ../build.git
