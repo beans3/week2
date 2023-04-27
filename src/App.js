@@ -19,7 +19,8 @@ function App() {
     { id: uuidv4(), title: "일곱 번째 게시물", date: "2022-07-12", likes: 3, content: "일곱 번째 게시물 내용입니다." },
     { id: uuidv4(), title: "여덟 번째 게시물", date: "2022-08-05", likes: 6, content: "여덟 번째 게시물 내용입니다." },
     { id: uuidv4(), title: "아홉 번째 게시물", date: "2022-09-23", likes: 4, content: "아홉 번째 게시물 내용입니다." },
-    { id: uuidv4(), title: "열 번째 게시물", date: "2022-10-31", likes: 1, content: "열 번째 게시물 내용입니다." }
+    { id: uuidv4(), title: "열 번째 게시물", date: "2022-10-31", likes: 1, content: "열 번째 게시물 내용입니다." },
+    { id: uuidv4(), title: "열 번째 게시물", date: "2022-10-31", likes: 2, content: "열 한 번째 게시물 내용입니다." },
   ];
   const today = new Date();
   const formattedDate = formatDate(today); // 예: "2023-04-19"
